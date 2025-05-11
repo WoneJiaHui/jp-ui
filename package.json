@@ -11,18 +11,28 @@
   },
   "dependencies": {
     "@jiaminghi/data-view": "^2.10.0",
+<<<<<<< HEAD
     "@vue/runtime-dom": "^3.5.14",
+=======
+>>>>>>> a72027f (首次提交)
     "axios": "^0.19.0",
     "bpmn-js-cli": "1.4.1",
     "bpmn-js-task-priorities": "^0.2.0",
     "core-js": "^3.4.4",
+<<<<<<< HEAD
     "cropperjs": "1.5.12",
+=======
+>>>>>>> a72027f (首次提交)
     "crypto-js": "^4.0.0",
     "dayjs": "^1.10.5",
     "echarts": "^4.5.0",
     "element-ui": "^2.15.10",
     "exceljs": "^4.3.0",
     "font-awesome": "^4.7.0",
+<<<<<<< HEAD
+=======
+    "cropperjs": "1.5.12",
+>>>>>>> a72027f (首次提交)
     "jeeplus-filemanager": "^2.0.0",
     "jeeplus-flowable-v2": "^2.0.0",
     "jeeplus-form-v2": "^2.0.1",
