@@ -40,8 +40,7 @@ const mainRoutes = {
     {path: '/ureport/preview', component: null, name: 'ureport-preview', meta: {title: '预览报表', type: 'iframe', menuId: 'ureport-preview'}},
     {path: '/form/explorer', component: null, name: 'form-explorer', meta: {title: '浏览器', type: 'iframe'}},
     {path: '/database/datatable/TableForm', component: _import('modules/database/datatable/TableForm'), name: 'table-form', meta: {title: '数据库表详情'}},
-    {path: '/404', component: _import('common/404'), name: '404', meta: {title: '404未找到'}}
-
+    {path: '/404', component: _import('common/404'), name: '404', meta: {title: '404未找到'}},
   ]
 }
 
