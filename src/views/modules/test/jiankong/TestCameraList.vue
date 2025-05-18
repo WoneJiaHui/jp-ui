@@ -3,9 +3,10 @@
     <vxe-toolbar :refresh="{query: refreshList}" export print custom>
       <template #buttons>
         <el-button type="primary" size="small" icon="el-icon-plus" @click="add()">新增</el-button>
+        <el-button type="info" size="small" icon="el-icon-camera" @click="openLocalCamera">打开本地摄像头</el-button>
       </template>
     </vxe-toolbar>
-    <div style="height: calc(100% - 40px);">
+    <div style="height: calc(100% - 80px);">
       <vxe-table
         border="inner"
         auto-resize
@@ -64,12 +65,22 @@
           您的浏览器不支持视频播放。
         </video>
       </el-dialog>
+
+      <el-dialog title="本地摄像头监控" width="80%" :visible.sync="localCameraDialogVisible">
+        <video
+          width="100%"
+          height="600px"
+          controls
+          ref="localVideo">
+          您的浏览器不支持本地摄像头。
+        </video>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
-import cameraMonitorService from '@/api/cameraMonitorService'
+import testCameraService from '@/api/test/jiankong/testCameraService'
 
 export default {
   data () {
@@ -93,7 +104,7 @@ export default {
     // 获取数据列表
     refreshList () {
       this.loading = true
-      cameraMonitorService.list({
+      testCameraService.list({
         'current': this.tablePage.currentPage,
         'size': this.tablePage.pageSize,
         'orders': this.tablePage.orders
@@ -110,7 +121,7 @@ export default {
     // 查看视频
     viewVideo (cameraId) {
       this.videoDialogVisible = true
-      cameraMonitorService.getVideoStream(cameraId).then(({ data }) => {
+      testCameraService.getVideoStream(cameraId).then(({ data }) => {
         this.videoStreamUrl = data.url
       })
     },
@@ -132,6 +143,34 @@ export default {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
       this.refreshList()
+    },
+
+     // 打开本地摄像头
+    openLocalCamera () {
+      this.localCameraDialogVisible = true
+      this.startLocalCamera()
+    },
+    // 启动本地摄像头
+    startLocalCamera () {
+      this.localVideoRef = this.$refs.localVideo
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then((stream) => {
+            if ('srcObject' in this.localVideoRef) {
+              this.localVideoRef.srcObject = stream
+            } else {
+              this.localVideoRef.src = window.URL.createObjectURL(stream)
+            }
+            this.localVideoRef.play()
+          })
+          .catch((error) => {
+            console.error('无法访问摄像头:', error)
+            this.$message.error('无法访问摄像头，请检查权限或设备。')
+          })
+      } else {
+        console.error('浏览器不支持 getUserMedia')
+        this.$message.error('您的浏览器不支持访问摄像头。')
+      }
     }
   }
 }

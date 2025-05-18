@@ -1,11 +1,11 @@
-// src/api/cameraMonitorService.js
+// src/api/test/jiankong/testCameraService.js
 import request from '@/utils/httpRequest'
 
 export default {
   // 获取摄像头列表
   list: function (params) {
     return request({
-      url: '/camera/monitor/list',
+      url: '/test/jiankong/testCamera/list',
       method: 'get',
       params: params
     })
@@ -13,7 +13,7 @@ export default {
   // 获取摄像头实时视频流
   getVideoStream: function (cameraId) {
     return request({
-      url: `/camera/monitor/${cameraId}/stream`,
+      url: '/test/jiankong/testCamera/video-stream/{cameraId}',
       method: 'get'
     })
   }

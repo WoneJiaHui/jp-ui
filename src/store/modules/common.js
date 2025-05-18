@@ -10,7 +10,14 @@ export default {
     // 开启tab
     isTab: localStorage.getItem('isTab') !== 'false',
     // 侧边栏, 菜单
-    leftMenuList: [],
+    leftMenuList: [
+      {
+        id: 'test-camera-list',
+        name: '摄像头监控',
+        icon: 'el-icon-video-camera', // 可按需更换图标
+        href: '/test/jiankong/TestCameraList'
+      }
+    ],
     // 当前活动的tab标签页
     menuActiveName: '',
     // 侧边栏类型名
