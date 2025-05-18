@@ -165,7 +165,13 @@ export default {
           })
           .catch((error) => {
             console.error('无法访问摄像头:', error)
-            this.$message.error('无法访问摄像头，请检查权限或设备。')
+            if (error.name === 'NotAllowedError') {
+              this.$message.error('您拒绝了摄像头访问权限，请重新允许。')
+            } else if (error.name === 'NotFoundError') {
+              this.$message.error('未检测到摄像头设备，请检查连接。')
+            } else {
+              this.$message.error('无法访问摄像头，请检查权限或设备。')
+            }
           })
       } else {
         console.error('浏览器不支持 getUserMedia')
