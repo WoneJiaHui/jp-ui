@@ -5,12 +5,15 @@
         <el-button type="primary" size="small" icon="el-icon-plus" @click="add()">新增</el-button>
       </template>
     </vxe-toolbar>
-    <div class="grid-container">
-      <TestCameraForm
-        v-for="(camera, index) in dataList.slice(0, 9)"
-        :key="index"
-        :cameraId="camera.id"
-      />
+    <!-- 添加一个具有固定高度和滚动属性的容器 -->
+    <div class="scroll-container">
+      <div class="grid-container">
+        <TestCameraForm
+          v-for="(camera, index) in dataList.slice(0, 9)"
+          :key="index"
+          :cameraId="camera.id"
+        />
+      </div>
     </div>
     <vxe-pager
       background
@@ -86,7 +89,14 @@ export default {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  margin-bottom: 20px;
+  grid-gap: 1px;
+  margin-bottom: 5px;
+}
+
+/* 添加滚动容器的样式 */
+.scroll-container {
+  height: 450px; /* 设置固定高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  margin-bottom: 5px;
 }
 </style>

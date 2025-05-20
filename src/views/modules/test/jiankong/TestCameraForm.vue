@@ -36,8 +36,10 @@ export default {
       this.loading = true
       testCameraService.getVideoStream(this.cameraId)
         .then(response => {
+          console.log('进入then')
           this.videoStreamUrl = response.data.url
           this.loading = false
+          console.log(this.videoStreamUrl)
         })
         .catch(error => {
           console.error('获取视频流失败:', error)
