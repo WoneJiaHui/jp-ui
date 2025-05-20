@@ -80,10 +80,48 @@ export default {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
       this.refreshList()
+<<<<<<< HEAD
+=======
+    },
+
+     // 打开本地摄像头
+    openLocalCamera () {
+      this.localCameraDialogVisible = true
+      this.startLocalCamera()
+    },
+    // 启动本地摄像头
+    startLocalCamera () {
+      this.localVideoRef = this.$refs.localVideo
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then((stream) => {
+            if ('srcObject' in this.localVideoRef) {
+              this.localVideoRef.srcObject = stream
+            } else {
+              this.localVideoRef.src = window.URL.createObjectURL(stream)
+            }
+            this.localVideoRef.play()
+          })
+          .catch((error) => {
+            console.error('无法访问摄像头:', error)
+            if (error.name === 'NotAllowedError') {
+              this.$message.error('您拒绝了摄像头访问权限，请重新允许。')
+            } else if (error.name === 'NotFoundError') {
+              this.$message.error('未检测到摄像头设备，请检查连接。')
+            } else {
+              this.$message.error('无法访问摄像头，请检查权限或设备。')
+            }
+          })
+      } else {
+        console.error('浏览器不支持 getUserMedia')
+        this.$message.error('您的浏览器不支持访问摄像头。')
+      }
+>>>>>>> 6d2c2943b5d51404ec623e7283c67757b9b01ac0
     }
   }
 }
 </script>
+<<<<<<< HEAD
 
 <style scoped>
 .grid-container {
@@ -100,3 +138,5 @@ export default {
   margin-bottom: 5px;
 }
 </style>
+=======
+>>>>>>> 6d2c2943b5d51404ec623e7283c67757b9b01ac0
