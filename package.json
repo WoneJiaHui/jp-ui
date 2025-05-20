@@ -23,6 +23,7 @@
         "element-ui": "^2.15.10",
         "exceljs": "^4.3.0",
         "font-awesome": "^4.7.0",
+        "hls.js": "^1.6.2",
         "jeeplus-filemanager": "^2.0.0",
         "jeeplus-flowable-v2": "^2.0.0",
         "jeeplus-form-v2": "^2.0.1",
