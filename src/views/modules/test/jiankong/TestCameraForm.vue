@@ -4,21 +4,25 @@
       width="100%"
       height="100%"
       controls
-      :src="videoStreamUrl"
-      @error="handleVideoError"
-    >
+      :src="cameraAddress"
+      @error="handleVideoError">
       您的浏览器不支持视频播放。
     </video>
+    <p>摄像头地址: {{ cameraAddress }}</p>
   </div>
 </template>
 
 <script>
-import testCameraService from '@/api/test/jiankong/testCameraService'
 
 export default {
   props: {
     cameraId: {
       type: String,
+      required: true
+    },
+    cameraAddress: {
+      type: String,
+      default:'',
       required: true
     }
   },
@@ -29,24 +33,9 @@ export default {
     }
   },
   mounted() {
-    this.loadVideoStream()
+    console.log('接收到的摄像头地址:', this.cameraAddress);
   },
   methods: {
-    loadVideoStream() {
-      this.loading = true
-      testCameraService.getVideoStream(this.cameraId)
-        .then(response => {
-          console.log('进入then')
-          this.videoStreamUrl = response.data.url
-          this.loading = false
-          console.log(this.videoStreamUrl)
-        })
-        .catch(error => {
-          console.error('获取视频流失败:', error)
-          this.loading = false
-          this.$message.error('获取视频流失败，请稍后重试。')
-        })
-    },
     handleVideoError() {
       this.$message.error('视频播放出错，请检查摄像头或网络。')
     }
@@ -60,7 +49,6 @@ export default {
   height: 100%;
   overflow: hidden;
 }
-
 video {
   object-fit: cover;
 }

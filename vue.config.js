@@ -5,6 +5,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  productionSourceMap: false,
   publicPath: "./",
   runtimeCompiler: true,
   productionSourceMap: false,

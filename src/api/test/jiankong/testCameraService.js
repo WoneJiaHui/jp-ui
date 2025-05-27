@@ -1,19 +1,20 @@
+// src/api/test/jiankong/testCameraService.js
 import request from '@/utils/httpRequest'
 
 export default {
   // 获取摄像头列表
-  list (params) {
+  list: function (params) {
     return request({
       url: '/test/jiankong/testCamera/list',
       method: 'get',
-      params
+      params: params
     })
   },
-  // 获取摄像头实时视频流
-  getVideoStream (cameraId) {
+  save: function (inputForm) {
     return request({
-      url: `/test/jiankong/testCamera/video-stream/${cameraId}`,
-      method: 'get'
-    })
+      url: '/test/jiankong/testCamera/save',
+      method: 'post',
+      data: inputForm
+    });
   }
 }
